@@ -13,7 +13,7 @@
 		<class>com.algaworks.erp.model.RamoAtividade</class>
 
 		<properties>
-			<property name="hibernate.hbm2ddl.auto" value="validate" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />
 			<property name="hibernate.dialect"
 				value="org.hibernate.dialect.MySQL8Dialect" />
 			<property name="hibernate.show_sql" value="true" />

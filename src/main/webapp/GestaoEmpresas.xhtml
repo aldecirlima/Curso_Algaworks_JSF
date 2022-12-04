@@ -41,11 +41,30 @@
 							itemValue="#{tipoEmpresa}" />
 					</p:selectOneMenu>
 
-					<h:inputHidden />
-					<p:commandButton value="Salvar" actionListener="#{gestaoEmpresasBean.salvar}" update="@form"/>
+					<p:outputLabel value="Data fundação: " for="dataFundacao" />
+					<h:panelGroup>
+						<p:calendar id="dataFundacao" required="true" showOn="button"
+							pattern="dd/MM/yyyy" mask="true"
+							value="#{gestaoEmpresasBean.empresa.dataFundacao}" />
+						<p:message for="dataFundacao" />
+					</h:panelGroup>
+
+					<p:outputLabel value="Faturamento: " for="faturamento" />
+					<h:panelGroup>
+						<p:inputText id="faturamento" placeholder="00,00"
+							value="#{gestaoEmpresasBean.empresa.faturamento}">
+							<f:convertNumber type="currency" pattern="#,##0.00"
+								maxFractionDigits="2" minFractionDigits="2" maxIntegerDigits="10" />
+						</p:inputText>
+						<p:message for="faturamento" />
+					</h:panelGroup>
 
 					<h:inputHidden />
-					<p:commandLink value="Ajuda?" action="#{gestaoEmpresasBean.ajuda}"/>
+					<p:commandButton value="Salvar"
+						actionListener="#{gestaoEmpresasBean.salvar}" update="@form" />
+
+					<h:inputHidden />
+					<p:commandLink value="Ajuda?" action="#{gestaoEmpresasBean.ajuda}" />
 
 				</h:panelGrid>
 

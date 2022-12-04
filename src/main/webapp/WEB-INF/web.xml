@@ -8,17 +8,19 @@
 	<welcome-file-list>
 		<welcome-file>GestaoEmpresas.xhtml</welcome-file>
 	</welcome-file-list>
-	
-	<!--  
+
+	<!-- <context-param> <param-name>primefaces.FONT_AWESOME</param-name> <param-value>true</param-value> 
+		</context-param> -->
+
 	<context-param>
-		<param-name>primefaces.FONT_AWESOME</param-name>
+		<param-name>primefaces.CLIENT_SIDE_LOCALISATION</param-name>
 		<param-value>true</param-value>
-	</context-param> -->
-	
-	 <context-param>
-        <param-name>primefaces.THEME</param-name>
-        <param-value>saga</param-value>
-    </context-param>
+	</context-param>
+
+	<context-param>
+		<param-name>primefaces.THEME</param-name>
+		<param-value>saga</param-value>
+	</context-param>
 
 	<context-param>
 		<param-name>javax.faces.PROJECT_STAGE</param-name>
@@ -40,8 +42,8 @@
 		<listener-class>org.jboss.weld.environment.servlet.Listener</listener-class>
 	</listener>
 	<!-- Fim Configuração CDI -->
-	
-	
+
+
 	<!-- Configurações do JSF -->
 	<servlet>
 		<servlet-name>Faces Servlet</servlet-name>
@@ -53,7 +55,7 @@
 		<servlet-name>Faces Servlet</servlet-name>
 		<url-pattern>*.xhtml</url-pattern>
 	</servlet-mapping>
-	
-	<!--  Fim das configurações do JSF -->
+
+	<!-- Fim das configurações do JSF -->
 
 </web-app>
