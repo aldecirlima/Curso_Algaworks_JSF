@@ -44,9 +44,12 @@
 					<h:inputHidden />
 					<p:commandButton value="Salvar" actionListener="#{gestaoEmpresasBean.salvar}" update="@form"/>
 
+					<h:inputHidden />
+					<p:commandLink value="Ajuda?" action="#{gestaoEmpresasBean.ajuda}"/>
+
 				</h:panelGrid>
 
-				<p:dataTable value="{[1, 2, 3, 4, 5]}" var="n">
+				<p:dataTable value="#{gestaoEmpresasBean.indices}" var="n">
 
 					<f:facet name="header">
 						<div class="flex-row-center">

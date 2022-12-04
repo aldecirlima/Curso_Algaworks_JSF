@@ -17,13 +17,16 @@ public class GestaoEmpresasBean implements Serializable {
 	private Empresa empresa = new Empresa();
 
 	public void salvar() {
-		System.out.println("Razão social: " + empresa.getRazaoSocial() 
-						+ " - Nome fantasia " + empresa.getNomeFantasia()
-						+ " - Tipo: " + empresa.getTipo().getDescricao());
+		System.out.println("Razão social: " + empresa.getRazaoSocial() + " - Nome fantasia " + empresa.getNomeFantasia()
+				+ " - Tipo: " + empresa.getTipo().getDescricao());
 	}
 
 	public Empresa getEmpresa() {
 		return empresa;
+	}
+
+	public String ajuda() {
+		return "AjudaGestaoEmpresas?faces-redirect=true";
 	}
 
 	public void setEmpresa(Empresa empresa) {
@@ -32,6 +35,14 @@ public class GestaoEmpresasBean implements Serializable {
 
 	public TipoEmpresa[] getTiposEmpresa() {
 		return TipoEmpresa.values();
+	}
+	
+	
+	public Integer[] getIndices() {
+		
+		Integer[] numeros = {1, 2, 3, 4, 5};
+		
+		return numeros;
 	}
 
 }

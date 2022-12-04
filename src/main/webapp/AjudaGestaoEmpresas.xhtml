@@ -6,7 +6,7 @@
 <h:head>
 
 	<meta charset="UTF-8" />
-	<title>Gestão Empresas</title>
+	<title>Ajuda</title>
 
 	<h:outputStylesheet library="algaworks" name="estilo.css" />
 
@@ -17,28 +17,20 @@
 	<header>
 		<h:graphicImage library="algaworks" name="logo.png" />
 	</header>
-
+	
+	
 	<div id="conteudo">
-		<div class="card">
-			<h:form id="form">
-				<h:panelGrid columns="2" cellpadding="5" cellspacing="5">
+		<h2>Ajuda</h2>
 
-					<p:outputLabel value="Número: " />
-					<p:outputLabel value="#{gestaoEmpresasBean.numero}" />
+		<h:form>
+			<p>Esta é a ajuda da página de cadastro de empresas.</p>
+			<p> 
+				<p:commandLink  value="Voltar" action="GestaoEmpresas?faces-redirect=true" />
+			</p>
+		
+		</h:form>
 
-					<h:inputHidden />
-					<p:commandButton value="Salvar" update="@form" />
-
-
-				</h:panelGrid>
-
-
-			</h:form>
-		</div>
 	</div>
-
-
-
 
 
 
