@@ -4,11 +4,10 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 
 import com.algaworks.erp.model.Empresa;
-
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.TypedQuery;
 
 public class Empresas implements Serializable {
 

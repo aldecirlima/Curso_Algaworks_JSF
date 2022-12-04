@@ -15,12 +15,13 @@
 
 	<dependencies>
 
+
 		<!-- CDI é uma especificação. O Weld é uma implementação do CDI.  -->
 		<dependency>
 			<groupId>org.jboss.weld.servlet</groupId>
 			<artifactId>weld-servlet</artifactId>
-			<version>2.4.8.Final</version>
-			<scope>compile</scope>
+			<version>3.0.0.Alpha1</version>
+			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
@@ -40,27 +41,21 @@
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
-			<version>3.0.1</version>
+			<version>3.1.0</version>
 			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
-			<version>5.3.0.Final</version>
+			<version>5.3.2.Final</version>
 			<scope>compile</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>javax.annotation</groupId>
-			<artifactId>javax.annotation-api</artifactId>
-			<version>1.3.2</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
-			<version>6.0.0.Final</version>
+			<version>5.2.3.Final</version>
 			<scope>compile</scope>
 		</dependency>
 
@@ -68,7 +63,7 @@
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>8.0.30</version>
-			<scope>compile</scope>
+			<scope>provided</scope>
 		</dependency>
 
 	</dependencies>

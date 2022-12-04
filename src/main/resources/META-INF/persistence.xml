@@ -3,23 +3,26 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
 	version="2.0">
-	
-	<persistence-unit name="curso-jsf">
+
+	<persistence-unit name="curso-jsf"
+		transaction-type="JTA">
+
+		<jta-data-source>java:jboss/datasources/MySqlDS</jta-data-source>
+		
+		<class>com.algaworks.erp.model.Empresa</class>
+		<class>com.algaworks.erp.model.RamoAtividade</class>
 
 		<properties>
-			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://192.168.100.200/curso_jsf" />
-			<property name="javax.persistence.jdbc.user" value="development" />
-			<property name="javax.persistence.jdbc.password" value="Mel2012*" />
-			<property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
-			
-			<property name="javax.persistence.schema-generation.database.action" value="drop-and-create" />
-      		<property name="javax.persistence.schema-generation.create-source" value="metadata" />
-      		<property name="javax.persistence.sql-load-script-source" value="META-INF/sql/dados-iniciais.sql"/>
-      		
-      		<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
+			<property name="hibernate.hbm2ddl.auto" value="validate" />
+			<property name="hibernate.dialect"
+				value="org.hibernate.dialect.MySQL8Dialect" />
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.format_sql" value="true" />
+			<property name="hibernate.default_catalog" value="cursojsf" />
+			<property name="hibernate.hbm2ddl.import_files"
+				value="META-INF/sql/dados-iniciais.sql" />
+
 		</properties>
 	</persistence-unit>
-	
+
 </persistence>
