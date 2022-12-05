@@ -24,22 +24,31 @@
 				<h:panelGrid columns="2" cellpadding="5" cellspacing="5">
 
 					<p:outputLabel value="Razão social: " for="razaoSocial" />
-					<p:inputText id="razaoSocial"
-						value="#{gestaoEmpresasBean.empresa.razaoSocial}" />
+					<h:panelGroup>
+						<p:inputText id="razaoSocial" required="true"
+							value="#{gestaoEmpresasBean.empresa.razaoSocial}" />
+						<p:message for="razaoSocial" />
+					</h:panelGroup>
 
 					<p:outputLabel value="Nome fantasia: " for="nomeFantasia" />
-					<p:inputText id="nomeFantasia"
-						value="#{gestaoEmpresasBean.empresa.nomeFantasia}" />
+					<h:panelGroup>
+						<p:inputText id="nomeFantasia" required="true"
+							value="#{gestaoEmpresasBean.empresa.nomeFantasia}" />
+						<p:message for="nomeFantasia" />
+					</h:panelGroup>
 
 					<p:outputLabel value="Tipo empresa: " for="tipo" />
-					<p:selectOneMenu id="tipo"
-						value="#{gestaoEmpresasBean.empresa.tipo}" filter="true"
-						filterMatchMode="startsWith">
-						<f:selectItem itemLabel="Selecione..." />
-						<f:selectItems value="#{gestaoEmpresasBean.tiposEmpresa}"
-							var="tipoEmpresa" itemLabel="#{tipoEmpresa.descricao}"
-							itemValue="#{tipoEmpresa}" />
-					</p:selectOneMenu>
+					<h:panelGroup>
+						<p:selectOneMenu id="tipo" required="true"
+							value="#{gestaoEmpresasBean.empresa.tipo}" filter="true"
+							filterMatchMode="startsWith">
+							<f:selectItem itemLabel="Selecione..." />
+							<f:selectItems value="#{gestaoEmpresasBean.tiposEmpresa}"
+								var="tipoEmpresa" itemLabel="#{tipoEmpresa.descricao}"
+								itemValue="#{tipoEmpresa}" />
+						</p:selectOneMenu>
+						<p:message for="tipo" />
+					</h:panelGroup>
 
 					<p:outputLabel value="Data fundação: " for="dataFundacao" />
 					<h:panelGroup>
@@ -51,57 +60,68 @@
 
 					<p:outputLabel value="Faturamento: " for="faturamento" />
 					<h:panelGroup>
-						<p:inputText id="faturamento" placeholder="00,00"
+						<p:inputText id="faturamento" placeholder="00,00" required="true"
 							value="#{gestaoEmpresasBean.empresa.faturamento}">
 							<f:convertNumber type="currency" pattern="#,##0.00"
-								maxFractionDigits="2" minFractionDigits="2" maxIntegerDigits="10" />
+								maxFractionDigits="2" minFractionDigits="2"
+								maxIntegerDigits="10" />
 						</p:inputText>
 						<p:message for="faturamento" />
 					</h:panelGroup>
 
+					<p:outputLabel value="CNPJ " for="cnpj" />
+					<h:panelGroup>
+						<p:inputMask id="cnpj" required="true" mask="99.999.999/9999-99"
+							value="#{gestaoEmpresasBean.empresa.cnpj}">
+						</p:inputMask>
+						<p:message for="cnpj" />
+					</h:panelGroup>
+
 					<h:inputHidden />
 					<p:commandButton value="Salvar"
-						actionListener="#{gestaoEmpresasBean.salvar}" update="@form" />
+						actionListener="#{gestaoEmpresasBean.salvar}" update="@form,:tableEmpresas" />
 
 					<h:inputHidden />
-					<p:commandLink value="Ajuda?" action="#{gestaoEmpresasBean.ajuda}" />
+
+					<p:commandLink value="Ajuda?" action="#{gestaoEmpresasBean.ajuda}"
+						process="@this" />
 
 				</h:panelGrid>
-
-				<p:dataTable value="#{gestaoEmpresasBean.indices}" var="n">
-
-					<f:facet name="header">
-						<div class="flex-row-center">
-							<div class="title-table">Tabela de empresas</div>
-						</div>
-					</f:facet>
-
-					<p:column headerText="Id">
-						<h:outputText value="#{n}" />
-					</p:column>
-
-					<p:column headerText="Razão social">
-						<h:outputText value="Algaworks softwares e treinamentos LTDA" />
-					</p:column>
-
-					<p:column>
-						<f:facet name="header">
-							<h:outputText value="Fantasia" />
-						</f:facet>
-						<h:outputText value="Algaworks" />
-					</p:column>
-
-					<p:column>
-						<f:facet name="header">
-							<h:outputText value="Tipo empresa" />
-						</f:facet>
-						<h:outputText value="LTDA" />
-					</p:column>
-
-
-				</p:dataTable>
-
 			</h:form>
+
+			<p:dataTable id="tableEmpresas" value="#{gestaoEmpresasBean.indices}"
+				var="n">
+
+				<f:facet name="header">
+					<div class="flex-row-center">
+						<div class="title-table">Tabela de empresas</div>
+					</div>
+				</f:facet>
+
+				<p:column headerText="Id">
+					<h:outputText value="#{n}" />
+				</p:column>
+
+				<p:column headerText="Razão social">
+					<h:outputText value="Algaworks softwares e treinamentos LTDA" />
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Fantasia" />
+					</f:facet>
+					<h:outputText value="Algaworks" />
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Tipo empresa" />
+					</f:facet>
+					<h:outputText value="LTDA" />
+				</p:column>
+
+			</p:dataTable>
+
 		</div>
 	</div>
 
