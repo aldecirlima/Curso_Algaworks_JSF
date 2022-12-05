@@ -39,7 +39,7 @@ public class Empresas implements Serializable {
 	}
 
 	public List<Empresa> todas() {
-		return manager.createQuery("from Empresa", Empresa.class).getResultList();
+		return manager.createQuery("from Empresa a JOIN FETCH a.ramoAtividade", Empresa.class).getResultList();
 	}
 
 	public Empresa guardar(Empresa empresa) {
