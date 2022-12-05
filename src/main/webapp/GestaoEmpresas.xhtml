@@ -79,12 +79,8 @@
 
 					<h:inputHidden />
 					<p:commandButton value="Salvar"
-						actionListener="#{gestaoEmpresasBean.salvar}" update="@form,:tableEmpresas" />
-
-					<h:inputHidden />
-
-					<p:commandLink value="Ajuda?" action="#{gestaoEmpresasBean.ajuda}"
-						process="@this" />
+						actionListener="#{gestaoEmpresasBean.salvar}"
+						update="@form,:tableEmpresas" />
 
 				</h:panelGrid>
 			</h:form>
@@ -106,17 +102,11 @@
 					<h:outputText value="Algaworks softwares e treinamentos LTDA" />
 				</p:column>
 
-				<p:column>
-					<f:facet name="header">
-						<h:outputText value="Fantasia" />
-					</f:facet>
+				<p:column headerText="Nome fantasia">
 					<h:outputText value="Algaworks" />
 				</p:column>
 
-				<p:column>
-					<f:facet name="header">
-						<h:outputText value="Tipo empresa" />
-					</f:facet>
+				<p:column headerText="Tipo empresa">
 					<h:outputText value="LTDA" />
 				</p:column>
 
