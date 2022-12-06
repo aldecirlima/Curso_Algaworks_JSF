@@ -9,7 +9,7 @@
 	<title>Gestão Empresas</title>
 
 	<h:outputStylesheet library="algaworks" name="estilo.css" />
-	
+
 	<f:metadata>
 		<f:viewAction action="#{gestaoEmpresasBean.todasEmpresas}" />
 	</f:metadata>
@@ -25,36 +25,41 @@
 	<div id="conteudo">
 
 		<h2>Cadastro de empresas</h2>
+		<h:form>
+			<p:dataTable value="#{gestaoEmpresasBean.listaEmpresas}" rows="10"
+				stripedRows="true" reflow="true"
+				emptyMessage="Nenhuma informação a ser exibida..."
+				stickyHeader="true" stickyTopAt=".layout-topbar"
+				paginatorPosition="bottom" paginator="true" var="empresa">
 
-		<p:dataTable value="#{gestaoEmpresasBean.listaEmpresas}" rows="10" emptyMessage="Nenhuma informação a ser exibida..."
-			paginatorPosition="bottom" paginator="true" var="empresa">
+				<f:facet name="header">
+					<div class="flex-row-center">
+						<div class="title-table">Lista de empresas</div>
+					</div>
+				</f:facet>
 
-			<f:facet name="header">
-				<div class="flex-row-center">
-					<div class="title-table">Lista de empresas</div>
-				</div>
-			</f:facet>
+				<p:column headerText="Razão Social" sortBy="#{empresa.razaoSocial}">
+					<p:outputLabel value="#{empresa.razaoSocial}" />
+				</p:column>
 
-			<p:column headerText="Razão Social">
-				<p:outputLabel value="#{empresa.razaoSocial}" />
-			</p:column>
+				<p:column headerText="Nome Fantasia"
+					sortBy="#{empresa.nomeFantasia}">
+					<p:outputLabel value="#{empresa.nomeFantasia}" />
+				</p:column>
 
-			<p:column headerText="Nome Fantasia">
-				<p:outputLabel value="#{empresa.nomeFantasia}" />
-			</p:column>
-			
-			<p:column headerText="Tipo Empresa">
-				<p:outputLabel value="#{empresa.tipo}" />
-			</p:column>
-			
-			<p:column headerText="Ramo Atividade">
-				<p:outputLabel value="#{empresa.ramoAtividade.descricao}" />
-			</p:column>
+				<p:column headerText="Tipo Empresa" sortBy="#{empresa.tipo}">
+					<p:outputLabel value="#{empresa.tipo}" />
+				</p:column>
 
+				<p:column headerText="Ramo Atividade"
+					sortBy="#{empresa.ramoAtividade.descricao}">
+					<p:outputLabel value="#{empresa.ramoAtividade.descricao}" />
+				</p:column>
 
 
-		</p:dataTable>
 
+			</p:dataTable>
+		</h:form>
 	</div>
 
 	<footer> Curso online "JSF e Primefaces Essencial" </footer>
