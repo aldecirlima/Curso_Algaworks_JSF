@@ -15,6 +15,11 @@
 
 	<dependencies>
 
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>font-awesome</artifactId>
+			<version>5.12.0</version>
+		</dependency>
 
 		<!-- CDI é uma especificação. O Weld é uma implementação do CDI.  -->
 		<dependency>
