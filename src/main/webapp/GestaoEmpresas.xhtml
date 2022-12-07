@@ -10,43 +10,45 @@
 	<ui:define name="titulo">Cadastro de empresas</ui:define>
 	<ui:define name="conteudo">
 		<f:metadata>
-			<f:viewAction action="#{gestaoEmpresasBean.todasEmpresas}" />
+			<f:viewAction action="#{gestaoEmpresasBean.todasEmpresas}" />http://localhost:8080/curso-jsf/#
 		</f:metadata>
-
+		<p:tooltip position="top" autoHide="true" />
 		<h:form>
+
+			<p:messages id="messages" closable="false" />
 
 			<p:menubar>
 				<p:menuitem>
 					<div class="ui-input-icon-left mr-2">
-						<i class="pi pi-fw pi-search" /> 
-						<span class="ui-float-label">
-							<p:inputText value="" /> 
-							<p:outputLabel for="@previous"
-								value="Nome da empresa" />
+						<i class="pi pi-fw pi-search" /> <span class="ui-float-label">
+							<p:inputText value="#{gestaoEmpresasBean.termoPesquisa}" /> <p:outputLabel
+								for="@previous" value="Nome da empresa" />
 						</span>
 					</div>
 					<p:commandButton value="Pesquisar" styleClass="ui-button-info"
-						title="Pesquisar empresas" />
+						actionListener="#{gestaoEmpresasBean.pesquisar}"
+						update="messages, empresasDataTable" title="Pesquisar empresas" />
 				</p:menuitem>
 				<p:divider layout="vertical" />
 				<p:menuitem value="Nova empresa" icon="pi pi-plus" id="novaEmpresa"
-					title="Cadastrar nova empresa" />
+					title="Cadastrar nova empresa"
+					onclick="PF('empresaDialogWidgetVar').show()" />
 				<p:divider layout="vertical" />
 				<p:menuitem value="Editar" icon="pi pi-pencil" id="editar"
 					title="Editar empresa" />
 				<p:menuitem value="Excluir" icon="pi pi-trash" id="excluir"
 					title="Excluir empresa" />
 				<p:divider layout="vertical" />
-				<p:menuitem value="Exportar" icon="pi pi-file-excel" id="exportar"
-					title="Exportar para excel" />
+				<p:menuitem value="Exportar" title="Exportar para excel"
+					icon="pi pi-file-excel" id="exportar" />
+				<p:tooltip for="exportar" position="top" autoHide="false" />
 			</p:menubar>
 
-			<p:tooltip position="top" />
 
 			<p:spacer height="5px" />
 
-			<p:dataTable value="#{gestaoEmpresasBean.listaEmpresas}" rows="10"
-				stripedRows="true" reflow="true"
+			<p:dataTable value="#{gestaoEmpresasBean.listaEmpresas}" rows="8"
+				id="empresasDataTable" stripedRows="true" reflow="true"
 				emptyMessage="Nenhuma informação a ser exibida..."
 				stickyHeader="true" stickyTopAt=".layout-topbar"
 				paginatorPosition="bottom" paginator="true" var="empresa">
@@ -76,8 +78,10 @@
 				</p:column>
 
 
-
 			</p:dataTable>
+
+			<ui:include src="WEB-INF/dialogs/DialogNovaEmpresa.xhtml" />
+
 		</h:form>
 
 	</ui:define>

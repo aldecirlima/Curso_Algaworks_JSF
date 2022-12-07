@@ -18,12 +18,12 @@ header {
 }
 
 #conteudo {
-	padding: 0px 8px
+	padding: 0px 20px
 }
 
 footer {
 	border-top: 1px solid #ccc;
-	padding: 5px 8px;
+	padding: 5px 20px;
 	margin-top: 20px;
 	margin-bottom: 10px
 }
