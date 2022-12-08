@@ -7,35 +7,52 @@
 
 
 	<p:dialog header="Nova empresa" widgetVar="empresaDialogWidgetVar"
-		modal="true" resizable="false" closeOnEscape="true">
-		<h:panelGrid columns="2" cellpadding="5px" cellspacing="5px">
+		id="empresaDialog" showEffect="clip" hideEffect="clip" modal="true"
+		resizable="false" closeOnEscape="true"
+		rendered="#{gestaoEmpresasBean.empresa ne null}">
+		
+		<h:panelGrid columns="2" cellpadding="5" cellspacing="5"
+			id="empresaPanelGrid">
 
 			<p:outputLabel value="Razão social: " for="razaoSocial" />
-			<p:inputText id="razaoSocial" size="80" maxlength="120" />
+			<p:inputText id="razaoSocial" size="80" maxlength="120"
+				value="#{gestaoEmpresasBean.empresa.razaoSocial}" />
 
 			<p:outputLabel value="Nome fantasia: " for="nomeFantasia" />
-			<p:inputText id="nomeFantasia" size="80" maxlength="80" />
+			<p:inputText id="nomeFantasia" size="80" maxlength="80"
+				value="#{gestaoEmpresasBean.empresa.nomeFantasia}" />
 
 			<p:outputLabel value="Tipo empresa: " for="tipo" />
-			<p:selectOneMenu id="tipo">
+			<p:selectOneMenu id="tipo" value="#{gestaoEmpresasBean.empresa.tipo}">
 				<f:selectItem itemLabel="Selecione..." />
 				<f:selectItems value="#{gestaoEmpresasBean.tiposEmpresa}"
 					var="tipoEmpresa" itemLabel="#{tipoEmpresa.descricao}"
 					itemValue="#{tipoEmpresa}" />
 			</p:selectOneMenu>
-			
+
 			<p:outputLabel value="CNPJ: " for="cnpj" />
-			<p:inputMask id="cnpj" mask="99.999.999/9999-99" size="18" maxlength="18"/>
-			
+			<p:inputMask id="cnpj" mask="99.999.999/9999-99" size="18"
+				maxlength="18" value="#{gestaoEmpresasBean.empresa.cnpj}" />
+
 			<p:outputLabel value="Data fundação" for="dataFundacao" />
-			<p:calendar id="dataFundacao" showButtonPanel="true" pattern="dd/MM/yyyy" size="12" mask="true"/>
-			
+			<p:calendar id="dataFundacao" showButtonPanel="true"
+				pattern="dd/MM/yyyy" size="12" mask="true"
+				value="#{gestaoEmpresasBean.empresa.dataFundacao}" />
+
 			<p:outputLabel value="Ramo atividade: " for="ramoAtividade" />
-			<p:autoComplete id="ramoAtividade" size="80" />
-			
+			<p:autoComplete id="ramoAtividade" size="80"
+				value="#{gestaoEmpresasBean.empresa.ramoAtividade}"
+				completeMethod="#{gestaoEmpresasBean.completarRamoAtividade}"
+				converter="#{gestaoEmpresasBean.ramoAtividadeConverter}"
+				var="ramoAtividade" itemLabel="#{ramoAtividade.descricao}"
+				itemValue="#{ramoAtividade}" />
+
 			<h:inputHidden />
-			<p:commandButton value="Salvar" />
-			
+			<p:commandButton value="Salvar" process="empresaDialog"
+				oncomplete="PF('empresaDialogWidgetVar').hide()"
+				actionListener="#{gestaoEmpresasBean.salvar}"
+				update="empresasDataTable empresaPanelGrid messages" />
+
 		</h:panelGrid>
 
 	</p:dialog>

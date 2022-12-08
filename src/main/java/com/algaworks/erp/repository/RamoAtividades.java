@@ -33,7 +33,7 @@ public class RamoAtividades implements Serializable {
 		CriteriaQuery<RamoAtividade> criteriaQuery = criteriaBuilder.createQuery(RamoAtividade.class);
 		Root<RamoAtividade> root = criteriaQuery.from(RamoAtividade.class);
 		criteriaQuery.select(root);
-		criteriaQuery.where(criteriaBuilder.like(root.get("descricao"), descricao + "%"));
+		criteriaQuery.where(criteriaBuilder.like(root.get("descricao"), "%" + descricao + "%"));
 
 		TypedQuery<RamoAtividade> query = manager.createQuery(criteriaQuery);
 

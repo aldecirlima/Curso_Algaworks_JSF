@@ -21,18 +21,19 @@
 				<p:menuitem>
 					<div class="ui-input-icon-left mr-2">
 						<i class="pi pi-fw pi-search" /> <span class="ui-float-label">
-							<p:inputText value="#{gestaoEmpresasBean.termoPesquisa}" /> <p:outputLabel
+							<p:inputText value="#{gestaoEmpresasBean.termoPesquisa}" id="termoPesquisa" /> <p:outputLabel
 								for="@previous" value="Nome da empresa" />
 						</span>
 					</div>
 					<p:commandButton value="Pesquisar" styleClass="ui-button-info"
-						actionListener="#{gestaoEmpresasBean.pesquisar}"
+						actionListener="#{gestaoEmpresasBean.pesquisar}" process="@this termoPesquisa"
 						update="messages, empresasDataTable" title="Pesquisar empresas" />
 				</p:menuitem>
 				<p:divider layout="vertical" />
 				<p:menuitem value="Nova empresa" icon="pi pi-plus" id="novaEmpresa"
-					title="Cadastrar nova empresa"
-					onclick="PF('empresaDialogWidgetVar').show()" />
+					title="Cadastrar nova empresa" process="@this" update="@form"
+					actionListener="#{gestaoEmpresasBean.prepararNovaEmpresa}"
+					oncomplete="PF('empresaDialogWidgetVar').show()" />
 				<p:divider layout="vertical" />
 				<p:menuitem value="Editar" icon="pi pi-pencil" id="editar"
 					title="Editar empresa" />

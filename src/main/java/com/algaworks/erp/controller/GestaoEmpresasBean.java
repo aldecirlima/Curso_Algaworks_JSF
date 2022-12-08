@@ -3,13 +3,17 @@ package com.algaworks.erp.controller;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.faces.convert.Converter;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.algaworks.erp.model.Empresa;
+import com.algaworks.erp.model.RamoAtividade;
 import com.algaworks.erp.model.TipoEmpresa;
 import com.algaworks.erp.repository.Empresas;
+import com.algaworks.erp.repository.RamoAtividades;
+import com.algaworks.erp.service.CadastroEmpresaService;
 import com.algaworks.erp.util.FacesMessages;
 
 @Named
@@ -22,6 +26,16 @@ public class GestaoEmpresasBean implements Serializable {
 
 	private List<Empresa> listaEmpresas;
 
+	private Converter<RamoAtividade> ramoAtividadeConverter;
+
+	private Empresa empresa;
+
+	@Inject
+	private CadastroEmpresaService cadastroEmpresaService;
+
+	@Inject
+	private RamoAtividades ramoAtividades;
+
 	@Inject
 	private Empresas empresas;
 
@@ -29,6 +43,10 @@ public class GestaoEmpresasBean implements Serializable {
 	private FacesMessages messages;
 
 //	Methods
+
+	public void prepararNovaEmpresa() {
+		empresa = new Empresa();
+	}
 
 	public void pesquisar() {
 		listaEmpresas = empresas.pesquisar(termoPesquisa);
@@ -42,7 +60,34 @@ public class GestaoEmpresasBean implements Serializable {
 		return TipoEmpresa.values();
 	}
 
+	public List<RamoAtividade> completarRamoAtividade(String termo) {
+		List<RamoAtividade> listaRamoAtividades = ramoAtividades.pesquisar(termo);
+		ramoAtividadeConverter = new RamoAtividadeConverter(listaRamoAtividades);
+		return listaRamoAtividades;
+	}
+
+	private Boolean jaHouvePesquisa() {
+		return termoPesquisa != null && !"".equals(termoPesquisa);
+	}
+
 //	Methods DAO
+
+	public void salvar() {
+
+		try {
+			cadastroEmpresaService.salvar(empresa);
+			messages.info("Empresa cadastrada com sucesso");
+		} catch (Exception e) {
+			messages.info("Erro ao salvar empresa verifique o preenchimento");
+
+		} finally {
+			if (jaHouvePesquisa()) {
+				pesquisar();
+			}
+		}
+
+	}
+
 	public void todasEmpresas() {
 		this.listaEmpresas = empresas.todas();
 	}
@@ -79,6 +124,30 @@ public class GestaoEmpresasBean implements Serializable {
 
 	public void setMessages(FacesMessages messages) {
 		this.messages = messages;
+	}
+
+	public RamoAtividades getRamoAtividades() {
+		return ramoAtividades;
+	}
+
+	public void setRamoAtividades(RamoAtividades ramoAtividades) {
+		this.ramoAtividades = ramoAtividades;
+	}
+
+	public Converter<RamoAtividade> getRamoAtividadeConverter() {
+		return ramoAtividadeConverter;
+	}
+
+	public void setRamoAtividadeConverter(Converter<RamoAtividade> ramoAtividadeConverter) {
+		this.ramoAtividadeConverter = ramoAtividadeConverter;
+	}
+
+	public Empresa getEmpresa() {
+		return empresa;
+	}
+
+	public void setEmpresa(Empresa empresa) {
+		this.empresa = empresa;
 	}
 
 }
