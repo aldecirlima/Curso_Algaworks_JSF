@@ -17,7 +17,7 @@
 
 			<p:messages id="messages" closable="false" />
 
-			<p:menubar>
+			<p:menubar id="menuBar">
 				<p:menuitem>
 					<div class="ui-input-icon-left mr-2">
 						<i class="pi pi-fw pi-search" /> <span class="ui-float-label">
@@ -33,19 +33,31 @@
 				</p:menuitem>
 				<p:divider layout="vertical" />
 				<p:menuitem value="Nova empresa" icon="pi pi-plus" id="novaEmpresa"
-					title="Cadastrar nova empresa" process="@this" update="@form"
+					title="Cadastrar nova empresa" process="@this" update="dialogInclude,messages"
 					actionListener="#{gestaoEmpresasBean.prepararNovaEmpresa}"
-					oncomplete="PF('empresaDialogWidgetVar').show()" >
-						<p:resetInput target="empresaDialog" />
-					</p:menuitem>
+					oncomplete="PF('empresaDialogWidgetVar').show()">
+					<p:resetInput target="empresaDialog" />
+				</p:menuitem>
+
 				<p:divider layout="vertical" />
+
 				<p:menuitem value="Editar" icon="pi pi-pencil" id="editar"
-					title="Editar empresa" />
+					actionListener="#{gestaoEmpresasBean.prepararEdicao}"
+					oncomplete="PF('empresaDialogWidgetVar').show()"
+					title="Editar empresa" process="@this" update="dialogInclude,messages"
+					disabled="#{not gestaoEmpresasBean.empresaSelecionada}">
+					<p:resetInput target="empresaDialog" />
+				</p:menuitem>
+
 				<p:menuitem value="Excluir" icon="pi pi-trash" id="excluir"
-					title="Excluir empresa" />
+					title="Excluir empresa"
+					disabled="#{not gestaoEmpresasBean.empresaSelecionada}" />
+
 				<p:divider layout="vertical" />
+
 				<p:menuitem value="Exportar" title="Exportar para excel"
 					icon="pi pi-file-excel" id="exportar" />
+
 				<p:tooltip for="exportar" position="top" autoHide="false" />
 			</p:menubar>
 
@@ -56,7 +68,11 @@
 				id="empresasDataTable" stripedRows="true" reflow="true"
 				emptyMessage="Nenhuma informação a ser exibida..."
 				stickyTopAt=".layout-topbar" paginatorPosition="bottom"
-				paginator="true" var="empresa">
+				paginator="true" var="empresa" selectionMode="single"
+				selection="#{gestaoEmpresasBean.empresa}" rowKey="#{empresa.id}">
+
+				<p:ajax event="rowSelect" update="frm:menuBar" />
+				<p:ajax event="rowUnselect" update="frm:menuBar" />
 
 				<f:facet name="header">
 					<div class="flex-row-center">
@@ -82,11 +98,10 @@
 					<p:outputLabel value="#{empresa.ramoAtividade.descricao}" />
 				</p:column>
 
-
 			</p:dataTable>
-
-			<ui:include src="WEB-INF/dialogs/DialogNovaEmpresa.xhtml" />
-
+			<h:panelGroup id="dialogInclude">
+				<ui:include src="WEB-INF/dialogs/DialogNovaEmpresa.xhtml" />
+			</h:panelGroup>
 		</h:form>
 
 	</ui:define>
