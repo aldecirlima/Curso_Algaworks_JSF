@@ -10,10 +10,10 @@
 	<ui:define name="titulo">Cadastro de empresas</ui:define>
 	<ui:define name="conteudo">
 		<f:metadata>
-			<f:viewAction action="#{gestaoEmpresasBean.todasEmpresas}" />http://localhost:8080/curso-jsf/#
+			<f:viewAction action="#{gestaoEmpresasBean.todasEmpresas}" />
 		</f:metadata>
 		<p:tooltip position="top" autoHide="true" />
-		<h:form>
+		<h:form id="frm">
 
 			<p:messages id="messages" closable="false" />
 
@@ -21,19 +21,23 @@
 				<p:menuitem>
 					<div class="ui-input-icon-left mr-2">
 						<i class="pi pi-fw pi-search" /> <span class="ui-float-label">
-							<p:inputText value="#{gestaoEmpresasBean.termoPesquisa}" id="termoPesquisa" /> <p:outputLabel
-								for="@previous" value="Nome da empresa" />
+							<p:inputText value="#{gestaoEmpresasBean.termoPesquisa}"
+								id="termoPesquisa" /> <p:outputLabel for="@previous"
+								value="Nome da empresa" />
 						</span>
 					</div>
 					<p:commandButton value="Pesquisar" styleClass="ui-button-info"
-						actionListener="#{gestaoEmpresasBean.pesquisar}" process="@this termoPesquisa"
-						update="messages, empresasDataTable" title="Pesquisar empresas" />
+						actionListener="#{gestaoEmpresasBean.pesquisar}"
+						process="@this termoPesquisa" update="messages, empresasDataTable"
+						title="Pesquisar empresas" />
 				</p:menuitem>
 				<p:divider layout="vertical" />
 				<p:menuitem value="Nova empresa" icon="pi pi-plus" id="novaEmpresa"
 					title="Cadastrar nova empresa" process="@this" update="@form"
 					actionListener="#{gestaoEmpresasBean.prepararNovaEmpresa}"
-					oncomplete="PF('empresaDialogWidgetVar').show()" />
+					oncomplete="PF('empresaDialogWidgetVar').show()" >
+						<p:resetInput target="empresaDialog" />
+					</p:menuitem>
 				<p:divider layout="vertical" />
 				<p:menuitem value="Editar" icon="pi pi-pencil" id="editar"
 					title="Editar empresa" />
@@ -51,8 +55,8 @@
 			<p:dataTable value="#{gestaoEmpresasBean.listaEmpresas}" rows="8"
 				id="empresasDataTable" stripedRows="true" reflow="true"
 				emptyMessage="Nenhuma informação a ser exibida..."
-				stickyHeader="true" stickyTopAt=".layout-topbar"
-				paginatorPosition="bottom" paginator="true" var="empresa">
+				stickyTopAt=".layout-topbar" paginatorPosition="bottom"
+				paginator="true" var="empresa">
 
 				<f:facet name="header">
 					<div class="flex-row-center">

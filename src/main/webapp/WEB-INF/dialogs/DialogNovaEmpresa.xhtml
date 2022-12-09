@@ -11,6 +11,8 @@
 		resizable="false" closeOnEscape="true"
 		rendered="#{gestaoEmpresasBean.empresa ne null}">
 		
+		<p:messages id="empresaMessages" />
+		
 		<h:panelGrid columns="2" cellpadding="5" cellspacing="5"
 			id="empresaPanelGrid">
 
@@ -49,9 +51,9 @@
 
 			<h:inputHidden />
 			<p:commandButton value="Salvar" process="empresaDialog"
-				oncomplete="PF('empresaDialogWidgetVar').hide()"
+				oncomplete="if (!args.validationFailed) PF('empresaDialogWidgetVar').hide()"
 				actionListener="#{gestaoEmpresasBean.salvar}"
-				update="empresasDataTable empresaPanelGrid messages" />
+				update="empresaPanelGrid empresaMessages" />
 
 		</h:panelGrid>
 

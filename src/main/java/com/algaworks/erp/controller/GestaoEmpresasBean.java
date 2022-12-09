@@ -1,12 +1,15 @@
 package com.algaworks.erp.controller;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.faces.convert.Converter;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+
+import org.primefaces.PrimeFaces;
 
 import com.algaworks.erp.model.Empresa;
 import com.algaworks.erp.model.RamoAtividade;
@@ -66,9 +69,9 @@ public class GestaoEmpresasBean implements Serializable {
 		return listaRamoAtividades;
 	}
 
-	private Boolean jaHouvePesquisa() {
-		return termoPesquisa != null && !"".equals(termoPesquisa);
-	}
+//	private Boolean jaHouvePesquisa() {
+//		return termoPesquisa != null && !"".equals(termoPesquisa);
+//	}
 
 //	Methods DAO
 
@@ -76,14 +79,17 @@ public class GestaoEmpresasBean implements Serializable {
 
 		try {
 			cadastroEmpresaService.salvar(empresa);
-			messages.info("Empresa cadastrada com sucesso");
+			messages.info("Empresa salva com sucesso");
+			if (listaEmpresas != null && !listaEmpresas.contains(empresa)) {
+				listaEmpresas.add(empresa);
+			} else {
+				this.todasEmpresas();
+			}
+
+			PrimeFaces.current().ajax().update(Arrays.asList("frm:empresasDataTable", "frm:messages"));
+
 		} catch (Exception e) {
 			messages.info("Erro ao salvar empresa verifique o preenchimento");
-
-		} finally {
-			if (jaHouvePesquisa()) {
-				pesquisar();
-			}
 		}
 
 	}

@@ -29,7 +29,8 @@ public class Empresas implements Serializable {
 	}
 
 	public List<Empresa> pesquisar(String nome) {
-		String jpql = "from Empresa where nomeFantasia like :nomeFantasia or razaoSocial like :razaoSocial";
+		String jpql = "from Empresa a JOIN FETCH a.ramoAtividade where a.nomeFantasia like :nomeFantasia "
+				+ "or a.razaoSocial like :razaoSocial ORDER BY a.id ASC";
 
 		TypedQuery<Empresa> query = manager.createQuery(jpql, Empresa.class);
 
@@ -40,7 +41,8 @@ public class Empresas implements Serializable {
 	}
 
 	public List<Empresa> todas() {
-		return manager.createQuery("from Empresa a JOIN FETCH a.ramoAtividade", Empresa.class).getResultList();
+		return manager.createQuery("from Empresa a JOIN FETCH a.ramoAtividade ORDER BY a.id ASC", Empresa.class)
+				.getResultList();
 	}
 
 	public Empresa guardar(Empresa empresa) {
