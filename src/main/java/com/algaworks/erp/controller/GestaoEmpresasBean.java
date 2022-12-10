@@ -50,7 +50,7 @@ public class GestaoEmpresasBean implements Serializable {
 	public void prepararNovaEmpresa() {
 		empresa = new Empresa();
 	}
-	
+
 	public void prepararEdicao() {
 		ramoAtividadeConverter = new RamoAtividadeConverter(Arrays.asList(empresa.getRamoAtividade()));
 	}
@@ -83,7 +83,7 @@ public class GestaoEmpresasBean implements Serializable {
 
 		try {
 			cadastroEmpresaService.salvar(empresa);
-			messages.info("Empresa salva com sucesso");
+			messages.info("Empresa salva com sucesso!");
 			if (listaEmpresas != null && !listaEmpresas.contains(empresa)) {
 				listaEmpresas.add(empresa);
 			} else {
@@ -96,6 +96,19 @@ public class GestaoEmpresasBean implements Serializable {
 			messages.info("Erro ao salvar empresa verifique o preenchimento");
 		}
 
+	}
+
+	public void excluir() {
+		try {
+			cadastroEmpresaService.excluir(empresa);
+			if (listaEmpresas != null) {
+				this.todasEmpresas();
+			}
+			empresa = null;
+			messages.info("Empresa excluída com sucesso!");
+		} catch (Exception e) {
+			messages.info("Erro ao excluir empresa");
+		}
 	}
 
 	public void todasEmpresas() {
@@ -159,7 +172,7 @@ public class GestaoEmpresasBean implements Serializable {
 	public void setEmpresa(Empresa empresa) {
 		this.empresa = empresa;
 	}
-	
+
 	public boolean isEmpresaSelecionada() {
 		return empresa != null && empresa.getId() != null;
 	}

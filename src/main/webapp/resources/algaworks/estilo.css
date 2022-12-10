@@ -66,3 +66,10 @@ h1 {
 	align-content: flex-start;
 }
 
+.height-60 {
+	height: 60px;
+}
+
+.height-40 {
+	height: 40px;
+}

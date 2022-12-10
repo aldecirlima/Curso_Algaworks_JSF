@@ -33,7 +33,8 @@
 				</p:menuitem>
 				<p:divider layout="vertical" />
 				<p:menuitem value="Nova empresa" icon="pi pi-plus" id="novaEmpresa"
-					title="Cadastrar nova empresa" process="@this" update="dialogInclude,messages"
+					title="Cadastrar nova empresa" process="@this"
+					update="dialogInclude,messages"
 					actionListener="#{gestaoEmpresasBean.prepararNovaEmpresa}"
 					oncomplete="PF('empresaDialogWidgetVar').show()">
 					<p:resetInput target="empresaDialog" />
@@ -44,19 +45,29 @@
 				<p:menuitem value="Editar" icon="pi pi-pencil" id="editar"
 					actionListener="#{gestaoEmpresasBean.prepararEdicao}"
 					oncomplete="PF('empresaDialogWidgetVar').show()"
-					title="Editar empresa" process="@this" update="dialogInclude,messages"
+					title="Editar empresa" process="@this"
+					update="dialogInclude,messages"
 					disabled="#{not gestaoEmpresasBean.empresaSelecionada}">
 					<p:resetInput target="empresaDialog" />
 				</p:menuitem>
 
 				<p:menuitem value="Excluir" icon="pi pi-trash" id="excluir"
 					title="Excluir empresa"
-					disabled="#{not gestaoEmpresasBean.empresaSelecionada}" />
+					actionListener="#{gestaoEmpresasBean.excluir}"
+					disabled="#{not gestaoEmpresasBean.empresaSelecionada}"
+					update="messages empresasDataTable menuBar" process="@this">
+					<p:confirm icon="ui-icon-alert" header="Confirmação de exclusão"
+						message="Confirma a exclusão da empresa?" />
+
+				</p:menuitem>
 
 				<p:divider layout="vertical" />
 
 				<p:menuitem value="Exportar" title="Exportar para excel"
-					icon="pi pi-file-excel" id="exportar" />
+					icon="pi pi-file-excel" id="exportar">
+					<p:dataExporter type="xls" target="empresasDataTable"
+						fileName="empresas" exportHeader="true" />
+				</p:menuitem>
 
 				<p:tooltip for="exportar" position="top" autoHide="false" />
 			</p:menubar>
@@ -64,9 +75,9 @@
 
 			<p:spacer height="5px" />
 
-			<p:dataTable value="#{gestaoEmpresasBean.listaEmpresas}" rows="8"
-				id="empresasDataTable" stripedRows="true" reflow="true"
-				emptyMessage="Nenhuma informação a ser exibida..."
+			<p:dataTable value="#{gestaoEmpresasBean.listaEmpresas}" rows="10"
+				id="empresasDataTable" stripedRows="true" reflow="true" size="small"
+				emptyMessage="Nenhuma informação a ser exibida..." 
 				stickyTopAt=".layout-topbar" paginatorPosition="bottom"
 				paginator="true" var="empresa" selectionMode="single"
 				selection="#{gestaoEmpresasBean.empresa}" rowKey="#{empresa.id}">
@@ -74,7 +85,7 @@
 				<p:ajax event="rowSelect" update="frm:menuBar" />
 				<p:ajax event="rowUnselect" update="frm:menuBar" />
 
-				<f:facet name="header">
+				<f:facet name="header" >
 					<div class="flex-row-center">
 						<div class="title-table">Lista de empresas</div>
 					</div>
